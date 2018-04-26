@@ -3,20 +3,13 @@ import sys
 
 
 def fibonacci_sum_naive(n):
-    if n <= 1:
-        return n
+    """ Calculate fibonacci for n + 2"""
+    cur, prev = 0, 1
 
-    previous = 0
-    current  = 1
-    sum      = 1
-    fibmap= {}
-
-    for i in range(60-1):
-        fibmap[i+1] = sum
-        previous, current = current, previous + current
-        sum += current
-    print(fibmap)
-    return sum % 10
+    for i in range(n+2):
+        prev, cur = cur, cur + prev
+    fib_sum = cur - 1
+    return fib_sum % 10
 
 
 if __name__ == '__main__':
