@@ -6,28 +6,19 @@ def dataset():
             points.append(tuple(map(int, f.readline().split())))
     return points
 
-def include_point(segment, point):
-    #to check segment has segment.start <= point <= segment.end
-    return segment[0] <= point <= segment[1]
-
-def choose_min_right_segment(segments):
-    #choose the minmum right value in segments. Just loop through segments and choose min_right
-    segments.sort(key=lambda x: x[1])
-    return segments[0][1]
-
 
 def calculate(segments):
     points = []
-
-    while(len(segments) > 0):
-        min_right = choose_min_right_segment(segments)
+    segments.sort(key=lambda x: x[1])
+    while segments:
+        min_right = segments[0][1]
         points.append(min_right)
         i = 0
         while i < len(segments):
-            if include_point(segments[i], min_right):
+            if segments[i][0] <= min_right <= segments[i][1]:
                 del segments[i]
             else:
-                i = i + 1
+                i += 1
     return len(points), points
 
 
