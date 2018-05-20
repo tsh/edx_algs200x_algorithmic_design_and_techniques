@@ -8,20 +8,16 @@ def dataset():
 def merge(left, right, invs):
     i, j = 0, 0
     res = []
-    while i < len(left) or j < len(right):
-        if i == len(left):
-            res.extend(right[j:])
-            break
-        elif j == len(right):
-            res.extend(left[i:])
-            break
-        elif left[i] <= right[j]:
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
             res.append(left[i])
             i += 1
         else:
             res.append(right[j])
             j += 1
-            invs += len(left) -i
+            invs += len(left) - i
+    res.extend(left[i:])
+    res.extend(right[j:])
     return res, invs
 
 
