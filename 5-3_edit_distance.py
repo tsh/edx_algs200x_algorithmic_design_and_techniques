@@ -26,9 +26,26 @@ def edit_distance(str1, str2):
     return matrix[n][m]
 
 
+def edit_distance_refactored(str1, str2):
+    matrix = [[None for _ in range(len(str1) + 1)] for _ in range(len(str2) + 1)]
+    for i in range(len(str2)+1):
+        for j in range(len(str1)+1):
+            if i == 0:
+                matrix[i][j] = j
+            elif j == 0:
+                matrix[i][j] = i
+            elif str2[i-1] == str1[j-1]:
+                matrix[i][j] = matrix[i-1][j-1]
+            else:
+                matrix[i][j] = 1 + min(matrix[i-1][j-1],
+                                       matrix[i-1][j],
+                                       matrix[i][j-1])
+    return matrix[i][j]
+
+
 
 if __name__ == '__main__':
-    print(edit_distance('ab', 'ab'))  # 0
-    print(edit_distance('short', 'ports'))  # 3
-    print(edit_distance('editing', 'distance'))  # 5
-    print(edit_distance(*dataset()))
+    print(edit_distance_refactored('ab', 'ab'))  # 0
+    print(edit_distance_refactored('short', 'ports'))  # 3
+    print(edit_distance_refactored('editing', 'distance'))  # 5
+    print(edit_distance_refactored(*dataset()))
