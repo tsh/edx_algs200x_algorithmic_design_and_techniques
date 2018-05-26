@@ -27,14 +27,14 @@ def edit_distance(str1, str2):
 
 
 def edit_distance_refactored(str1, str2):
-    matrix = [[None for _ in range(len(str1) + 1)] for _ in range(len(str2) + 1)]
-    for i in range(len(str2)+1):
-        for j in range(len(str1)+1):
+    matrix = [[None for _ in range(len(str2) + 1)] for _ in range(len(str1) + 1)]
+    for i in range(len(str1)+1):
+        for j in range(len(str2)+1):
             if i == 0:
                 matrix[i][j] = j
             elif j == 0:
                 matrix[i][j] = i
-            elif str2[i-1] == str1[j-1]:
+            elif str1[i-1] == str2[j-1]:
                 matrix[i][j] = matrix[i-1][j-1]
             else:
                 matrix[i][j] = 1 + min(matrix[i-1][j-1],
